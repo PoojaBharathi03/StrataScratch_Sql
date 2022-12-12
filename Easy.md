@@ -222,3 +222,35 @@ select city, property_type, avg(bathrooms) as bathrooms_avg , avg(bedrooms) as  
 from airbnb_search_details
 group by city, property_type;
 ```
+
+## 16. Salaries Differences  ([Question Link](https://platform.stratascratch.com/coding/10308-salaries-differences?tabname=question&code_type=3))
+
+### Write a query that calculates the difference between the highest salaries found in the marketing and engineering departments. Output just the absolute difference in salaries.
+
+### Tables: db_employee, db_dept
+
+### Solution:
+
+```
+with marketing_sal as
+     (
+     select dept.department, max(emp.salary) as max_marketing_sal
+     from db_employee emp 
+     join db_dept dept
+     on emp.department_id = dept.id 
+     where dept.department= 'marketing'
+     group by dept.department),
+     
+     engineering_sal as
+    (
+     select dept.department, max(emp.salary) as max_eng_sal
+     from db_employee emp 
+     join db_dept dept
+     on emp.department_id = dept.id 
+     where dept.department= 'engineering'
+     group by dept.department
+    
+    )
+
+select max_marketing_sal - max_eng_sal   from marketing_sal,engineering_sal
+```
