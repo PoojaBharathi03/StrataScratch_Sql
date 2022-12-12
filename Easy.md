@@ -254,3 +254,16 @@ with marketing_sal as
 
 select max_marketing_sal - max_eng_sal   from marketing_sal,engineering_sal
 ```
+
+## 17. Average Salaries ([Question Link](https://platform.stratascratch.com/coding/9917-average-salaries?code_type=3))
+
+### Compare each employee's salary with the average salary of the corresponding department.
+Output the department, first name, and salary of employees along with the average salary of that department.
+
+### Table: employee
+### Solution:
+
+```
+select department,	first_name,	salary,	avg(salary) over (partition by department)
+from employee
+```
